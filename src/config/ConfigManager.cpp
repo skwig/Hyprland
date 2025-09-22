@@ -3266,6 +3266,8 @@ bool CConfigManager::shouldUseSoftwareCursors(PHLMONITOR pMonitor) {
     static auto PNOHW      = CConfigValue<Hyprlang::INT>("cursor:no_hardware_cursors");
     static auto PINVISIBLE = CConfigValue<Hyprlang::INT>("cursor:invisible");
 
+    Debug::log(TRACE, "skwig: shouldUseSoftwareCursors");
+
     if (pMonitor->m_tearingState.activelyTearing)
         return true;
 

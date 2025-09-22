@@ -331,10 +331,15 @@ void CPointerManager::onCursorMoved() {
 }
 
 bool CPointerManager::attemptHardwareCursor(SP<CPointerManager::SMonitorPointerState> state) {
+    Debug::log(TRACE, "skwig: attemptHardwareCursor");
     auto output = state->monitor->m_output;
 
-    if (!(output->getBackend()->capabilities() & Aquamarine::IBackendImplementation::eBackendCapabilities::AQ_BACKEND_CAPABILITY_POINTER))
+    // sussy
+    if (!(output->getBackend()->capabilities() & Aquamarine::IBackendImplementation::eBackendCapabilities::AQ_BACKEND_CAPABILITY_POINTER)) {
+        Debug::log(TRACE, "skwig: attemptHardwareCursor - ret false, no AQ_BACKEND_CAPABILITY_POINTER");
         return false;
+    }
+    // sussy end
 
     const auto CURSORPOS = getCursorPosForMonitor(state->monitor.lock());
     state->monitor->m_output->moveCursor(CURSORPOS, state->monitor->shouldSkipScheduleFrameOnMouseEvent());
