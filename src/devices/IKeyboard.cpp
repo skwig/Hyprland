@@ -156,10 +156,10 @@ void IKeyboard::updateKeymapFD() {
     if (m_xkbKeymapV1FD.isValid())
         m_xkbKeymapV1FD.reset();
 
-    auto cKeymapStr   = xkb_keymap_get_as_string(m_xkbKeymap, XKB_KEYMAP_FORMAT_TEXT_V2);
+    auto cKeymapStr   = xkb_keymap_get_as_string2(m_xkbKeymap, XKB_KEYMAP_FORMAT_TEXT_V2, XKB_KEYMAP_SERIALIZE_KEEP_UNUSED);
     m_xkbKeymapString = cKeymapStr;
     free(cKeymapStr); // NOLINT(cppcoreguidelines-no-malloc,-warnings-as-errors)
-    auto cKeymapV1Str   = xkb_keymap_get_as_string(m_xkbKeymap, XKB_KEYMAP_FORMAT_TEXT_V1);
+    auto cKeymapV1Str   = xkb_keymap_get_as_string2(m_xkbKeymap, XKB_KEYMAP_FORMAT_TEXT_V1, XKB_KEYMAP_SERIALIZE_KEEP_UNUSED);
     m_xkbKeymapV1String = cKeymapV1Str;
     free(cKeymapV1Str); // NOLINT(cppcoreguidelines-no-malloc,-warnings-as-errors)
 
